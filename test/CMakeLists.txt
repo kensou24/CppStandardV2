@@ -43,9 +43,13 @@ file(GLOB sourcesString CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/str
 file(GLOB sourcesAlloc CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/alloc/*.cpp)
 file(GLOB sourcesConcurrency CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/concurrency/*.cpp)
 add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString} ${sourcesAlloc} ${sourcesConcurrency})
-target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2)
+
+find_package (Threads)
+target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2 ${CMAKE_THREAD_LIBS_INIT})
 
 set_target_properties(CppStandardV2Tests PROPERTIES CXX_STANDARD 17)
+
+
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
