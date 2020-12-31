@@ -40,7 +40,9 @@ CPMAddPackage(
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 file(GLOB sourcesUtil CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/util/*.cpp)
 file(GLOB sourcesString CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/string/*.cpp)
-add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString})
+file(GLOB sourcesAlloc CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/alloc/*.cpp)
+file(GLOB sourcesConcurrency CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/concurrency/*.cpp)
+add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString} ${sourcesAlloc} ${sourcesConcurrency})
 target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2)
 
 set_target_properties(CppStandardV2Tests PROPERTIES CXX_STANDARD 17)
