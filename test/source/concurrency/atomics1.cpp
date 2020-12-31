@@ -18,7 +18,7 @@
 
 
 long data;
-std::atomic<bool> readyFlag(false);
+std::atomic<bool> readyFlag2(false);
 
 void provider ()
 {
@@ -29,13 +29,13 @@ void provider ()
     data = 42;
 
     // and signal readiness
-    readyFlag.store(true);
+    readyFlag2.store(true);
 }
 
 void consumer ()
 {
     // wait for readiness and do something else
-    while (!readyFlag.load()) {
+    while (!readyFlag2.load()) {
         std::cout.put('.').flush();
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
