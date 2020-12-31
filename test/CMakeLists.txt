@@ -49,8 +49,6 @@ target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2 ${
 
 set_target_properties(CppStandardV2Tests PROPERTIES CXX_STANDARD 17)
 
-
-
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
