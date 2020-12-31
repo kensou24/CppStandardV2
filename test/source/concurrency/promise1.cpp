@@ -17,7 +17,7 @@
 #include <functional>
 #include <utility>
 #include <doctest/doctest.h>
-void doSomething (std::promise<std::string>& p)
+void doSomething4 (std::promise<std::string>& p)
 {
     try {
         // read character and throw exception if 'x'
@@ -43,7 +43,7 @@ TEST_CASE("promise1")
         // create a future to process the outcome
         std::future<std::string> f(p.get_future());
         // start a thread using the promise to store the outcome
-        std::thread t(doSomething,std::ref(p));
+        std::thread t(doSomething4,std::ref(p));
         t.detach();
         //...
 

@@ -31,7 +31,7 @@ int queryNumber ()
     return num;
 }
 
-void doSomething (char c, shared_future<int> f)
+void doSomething5 (char c, shared_future<int> f)
 {
     try {
         // wait for number of characters to print
@@ -55,9 +55,9 @@ TEST_CASE("sharedfuture1")
         shared_future<int> f = async(queryNumber);
 
         // start three threads each processing this number in a loop
-        auto f1 = async(launch::async,doSomething,'.',f);
-        auto f2 = async(launch::async,doSomething,'+',f);
-        auto f3 = async(launch::async,doSomething,'*',f);
+        auto f1 = async(launch::async,doSomething5,'.',f);
+        auto f2 = async(launch::async,doSomething5,'+',f);
+        auto f3 = async(launch::async,doSomething5,'*',f);
 
         // wait for all loops to be finished
         f1.get();

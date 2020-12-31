@@ -17,7 +17,7 @@
 #include <doctest/doctest.h>
 using namespace std;
 
-void doSomething (char c)
+void doSomething3 (char c)
 {
     // random-number generator (use c as seed to get different sequences)
     default_random_engine dre(c);
@@ -35,8 +35,8 @@ TEST_CASE("async3")
     cout << "starting 2 operations asynchronously" << endl;
 
     // start two loops in the background printing characters . or +
-    auto f1 = async([]{ doSomething('.'); });
-    auto f2 = async([]{ doSomething('+'); });
+    auto f1 = async([]{ doSomething3('.'); });
+    auto f2 = async([]{ doSomething3('+'); });
 
     // if at least one of the background tasks is running
     if (f1.wait_for(chrono::seconds(0)) != future_status::deferred ||

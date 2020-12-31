@@ -16,7 +16,7 @@
 #include <doctest/doctest.h>
 using namespace std;
 
-void doSomething (int num, char c)
+void doSomething6 (int num, char c)
 {
     try {
         // random-number generator (use c as seed to get different sequences)
@@ -42,12 +42,12 @@ void doSomething (int num, char c)
 TEST_CASE("thread1")
 {
     try {
-      thread t1(doSomething,5,'.');  // print five dots in separate thread
+      thread t1(doSomething6,5,'.');  // print five dots in separate thread
       cout << "- started fg thread " << t1.get_id() << endl;
 
       // print other characters in other background threads
       for (int i=0; i<5; ++i) {
-          thread t(doSomething,10,'a'+i); // print 10 chars in separate thread
+          thread t(doSomething6,10,'a'+i); // print 10 chars in separate thread
           cout << "- detach started bg thread " << t.get_id() << endl;
           t.detach();  // detach thread into the background
       }

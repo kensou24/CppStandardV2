@@ -17,7 +17,7 @@
 #include <doctest/doctest.h>
 using namespace std;
 
-int doSomething (char c)
+int doSomething2 (char c)
 {
     // random-number generator (use c as seed to get different sequences)
     std::default_random_engine dre(c);
@@ -34,12 +34,12 @@ int doSomething (char c)
 
 int func1 ()
 {
-    return doSomething('.');
+    return doSomething2('.');
 }
 
 int func2 ()
 {
-    return doSomething('+');
+    return doSomething2('+');
 }
 
 TEST_CASE("async1")
