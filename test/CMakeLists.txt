@@ -51,6 +51,7 @@ set_target_properties(CppStandardV2Tests PROPERTIES CXX_STANDARD 17)
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     target_compile_options(CppStandardV2 PUBLIC -Wall -pedantic -Wextra -pthread ) # -Werror
+    set_target_properties(CppStandardV2Tests PROPERTIES LINK_FLAGS "-pthread")
   elseif(MSVC)
     target_compile_options(CppStandardV2 PUBLIC /W3 ) # /WX
     target_compile_definitions(CppStandardV2Tests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
