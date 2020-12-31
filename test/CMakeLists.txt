@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(GreeterTests LANGUAGES CXX)
+project(CppStandardV2Tests LANGUAGES CXX)
 
 # ---- Options ----
 
@@ -22,9 +22,9 @@ CPMAddPackage(
 )
 
 if(TEST_INSTALLED_VERSION)
-  find_package(Greeter REQUIRED)
+  find_package(CppStandardV2 REQUIRED)
 else()
-  CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+  CPMAddPackage(NAME CppStandardV2 SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
 
 CPMAddPackage(
@@ -38,18 +38,20 @@ CPMAddPackage(
 # ---- Create binary ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
-add_executable(GreeterTests ${sources})
-target_link_libraries(GreeterTests doctest Greeter::Greeter)
+file(GLOB sourcesUtil CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/util/*.cpp)
+file(GLOB sourcesString CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/string/*.cpp)
+add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString})
+target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2)
 
-set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
+set_target_properties(CppStandardV2Tests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Greeter PUBLIC -Wall -pedantic -Wextra -Werror)
+    target_compile_options(CppStandardV2 PUBLIC -Wall -pedantic -Wextra ) # -Werror
   elseif(MSVC)
-    target_compile_options(Greeter PUBLIC /W4 /WX)
-    target_compile_definitions(GreeterTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
+    target_compile_options(CppStandardV2 PUBLIC /W3 ) # /WX
+    target_compile_definitions(CppStandardV2Tests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
 
@@ -61,11 +63,11 @@ enable_testing()
 # testing frameworks add the tests target instead: ADD_TEST(GreeterTests GreeterTests)
 
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-doctest_discover_tests(GreeterTests)
+doctest_discover_tests(CppStandardV2Tests)
 
 # ---- code coverage ----
 
 if(ENABLE_TEST_COVERAGE)
-  target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
+  target_compile_options(CppStandardV2 PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(CppStandardV2 PUBLIC -fprofile-arcs -ftest-coverage)
 endif()

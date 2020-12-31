@@ -1,5 +1,5 @@
 #include <greeter/greeter.h>
-#include <greeter/version.h>
+#include <cppstandardv2/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     std::cout << options.help() << std::endl;
     return 0;
   } else if (result["version"].as<bool>()) {
-    std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
+    std::cout << "Greeter, version " << CPPSTANDARDV2_VERSION << std::endl;
     return 0;
   }
 
