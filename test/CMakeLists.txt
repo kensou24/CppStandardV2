@@ -43,7 +43,10 @@ file(GLOB sourcesString CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/str
 file(GLOB sourcesAlloc CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/alloc/*.cpp)
 file(GLOB sourcesConcurrency CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/concurrency/*.cpp)
 file(GLOB sourcesAlgo CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/algo/*.cpp)
-add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString} ${sourcesAlloc} ${sourcesConcurrency} ${sourcesAlgo})
+file(GLOB sourcesCont CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/cont/*.cpp)
+file(GLOB sourcesContadapt CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/contadapt/*.cpp)
+add_executable(CppStandardV2Tests ${sources} ${sourcesUtil} ${sourcesString} ${sourcesAlloc} ${sourcesConcurrency} ${sourcesAlgo}
+        ${sourcesCont} ${sourcesContadapt})
 
 find_package (Threads)
 target_link_libraries(CppStandardV2Tests doctest CppStandardV2::CppStandardV2 ${CMAKE_THREAD_LIBS_INIT})
